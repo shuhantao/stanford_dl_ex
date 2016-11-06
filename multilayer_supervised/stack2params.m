@@ -22,7 +22,6 @@ for d = 1:numel(stack)
     % This can be optimized. But since our stacks are relatively short, it
     % is okay
     params = [params ; stack{d}.W(:) ; stack{d}.b(:) ];
-    
     % Check that stack is of the correct form
     assert(size(stack{d}.W, 1) == size(stack{d}.b, 1), ...
         ['The bias should be a *column* vector of ' ...
@@ -34,5 +33,4 @@ for d = 1:numel(stack)
              ' should have matching sizes.']);
      end
 end
-
 end
