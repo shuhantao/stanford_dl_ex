@@ -1,0 +1,451 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=mex 2016.10.8)  6 NOV 2016 00:39
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**ArmijoBacktrack.m compiled conjGrad.m dampedUpdate.m isLegal.m lbfgsAdd.m lbf
+gs.m lbfgsProd.m lbfgsUpdate.m mcholinc.m mchol.m mex minFunc.m minFunc_process
+InputOptions.m polyinterp.m precondDiag.m precondTriuDiag.m precondTriu.m taylo
+rModel.m WolfeLineSearch.m
+(./ArmijoBacktrack.m
+This is MeX  Version 1.05  18 XII 1993  (B. Jackowski & M. Ry\'cko)
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.1 function [t,x_
+                  new,f_new,g_new,funEvals,H] = ArmijoBacktrack(...
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.31 
+     
+? 
+
+Overfull \hbox (299.06818pt too wide) in paragraph at lines 1--31
+[]\tenrm function [t,x$[]\teni ew; f[]ew; g[]ew; funEvals; H\tenrm ] = \teni Ar
+mijoBacktrack\tenrm (\teni :::x; t; d; f; fr; g; gtd; c\tenrm 1\teni ; LS[]nter
+p; LS[]ulti; progTol; debug; doPlot; saveHessianComp; funObj; varargin\tenrm )$
+ |
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm f
+.\tenrm u
+.\tenrm n
+.\tenrm c
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.34     [f_
+            new,g_new,H] = funObj(x + t*d,varargin{:});
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.39 
+     
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.40 while f_
+             new > fr + c1*t*gtd || ~isLegal(f_new)
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.42 
+     
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.43     if LS_
+               interp == 0 || ~isLegal(f_new)
+? 
+! Undefined control sequence.
+l.46             fprintf('Fixed BT\n
+                                    ');
+? 
+! Undefined control sequence.
+l.54                 fprintf('Quad BT\n
+                                       ');
+? q
+OK, entering \batchmode...
+! Undefined control sequence.
+l.60                 fprintf('Cubic BT\n
+                                        ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.66 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (110.78648pt too wide) in paragraph at lines 43--66
+[]\tenrm if LS$[]\teni nterp \tenrm == 0\tensy jj \teni isLegal\tenrm (\teni f[
+]ew\tenrm )\teni ifdebugfprintf\tenrm ([]\teni FixedBT[]\tenrm ); \teni endt \t
+enrm = 0\teni :\tenrm 5 \tensy ^^C \teni t\tenrm ; \teni elseifLS[]nterp \tenrm
+ == 1\tensy jj \teni isLegal\tenrm (\teni g[]ew\tenrm )\teni iffunEvals <|
+
+\hbox(7.51782+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm i
+.\tenrm f
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm L
+.etc.
+
+
+Overfull \hbox (219.85255pt too wide) in paragraph at lines 43--66
+\tenrm 2\tensy jj\teni LS[]ulti \tenrm == 0\tensy jj \teni isLegal\tenrm (\teni
+ f[]rev\tenrm )\teni ifdebugfprintf\tenrm ([]\teni QuadBT[]\tenrm ); \teni endt
+ \tenrm = \teni polyinterp\tenrm ([0\teni fgtd\tenrm ; \teni tf[]ewsqrt\tenrm (
+\tensy ^^@\tenrm 1)]\teni ; doPlot; \tenrm 0\teni ; t\tenrm ); \teni elseifdebu
+gfprintf\tenrm ([]\teni CubicBT[]\tenrm ); \teni endt \tenrm =|
+
+\hbox(7.51782+2.86108)x469.75499, glue set - 1.0
+.\tenrm 2
+.\tensy j
+.\tensy j
+.\teni L
+.\teni S
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.67         if funEvals < 2 || LS_
+                                   multi == 0 || ~isLegal(f_prev)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.70                 fprintf('Grad-Cubic BT\n
+                                             ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.77                 fprintf('Grad-Quartic BT\n
+                                               ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.84                 fprintf('Grad-Quintic BT\n
+                                               ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.89 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (96.57425pt too wide) in paragraph at lines 67--89
+[]\tenrm if fu-nE-vals < 2 || LS$[]\teni ulti \tenrm == 0\tensy jj \teni isLega
+l\tenrm (\teni f[]rev\tenrm )\teni ifdebugfprintf\tenrm ([]\teni Grad \tensy ^^
+@ \teni CubicBT[]\tenrm ); \teni endt \tenrm = \teni polyinterp\tenrm ([0\teni 
+fgtd\tenrm ; \teni tf[]ewg[]ew[] \tensy ^^C|
+
+\hbox(7.51782+2.86108)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm i
+.\tenrm f
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm f
+.etc.
+
+
+Overfull \hbox (31.07547pt too wide) in paragraph at lines 67--89
+\teni d\tenrm ]\teni ; doPlot; \tenrm 0\teni ; t\tenrm ); \teni elseif isLegal\
+tenrm (\teni g[]rev\tenrm )\teni ifdebugfprintf\tenrm ([]\teni Grad \tensy ^^@ 
+\teni QuarticBT[]\tenrm ); \teni endt \tenrm = \teni polyinterp\tenrm ([0\teni 
+fgtd\tenrm ; \teni tf[]ewg[]ew[] \tensy ^^C|
+
+\hbox(7.51782+2.86108)x469.75499, glue set - 1.0
+.\teni d
+.\tenrm ]
+.\teni ;
+.\glue(\thinmuskip) 1.66663
+.\teni d
+.etc.
+
+
+Overfull \hbox (43.76309pt too wide) in paragraph at lines 67--89
+\teni d\tenrm ; \teni t[]revf[]revsqrt\tenrm (\tensy ^^@\tenrm 1)]\teni ; doPlo
+t; \tenrm 0\teni ; t\tenrm ); \teni elseifdebugfprintf\tenrm ([]\teni Grad \ten
+sy ^^@ \teni QuinticBT[]\tenrm ); \teni endt \tenrm = \teni polyinterp\tenrm ([
+0\teni fgtd\tenrm ; \teni tf[]ewg[]ew[] \tensy ^^C|
+
+\hbox(7.51782+2.86108)x469.75499, glue set - 1.0
+.\teni d
+.\tenrm ;
+.\glue(\thinmuskip) 1.66663
+.\teni t
+.\hbox(3.01389+1.3611)x4.62234, shifted 1.49998
+..\seveni p
+.etc.
+
+! Undefined control sequence.
+l.93 ...'Interpolated Value Too Small, Adjusting\n
+                                                  ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.98 ...'Interpolated Value Too Large, Adjusting\n
+                                                  ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.104     if LS_
+                multi
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.111 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.112     if ~saveHessianComp &
+                               & nargout == 6
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.112     if ~saveHessianComp &&
+                                 nargout == 6
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.113         [f_
+                 new,g_new,H] = funObj(x + t*d,varargin{:});
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.118 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.122 ...printf('Backtracking Line Search Failed\n
+                                                  ');
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.125         f_
+                new = f;
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.130 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.132 if nargout == 6 &
+                       & funEvals > 1 && saveHessianComp
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.132 if nargout == 6 &&
+                         funEvals > 1 && saveHessianComp
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.132 if nargout == 6 && funEvals > 1 &
+                                       & saveHessianComp
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.132 if nargout == 6 && funEvals > 1 &&
+                                         saveHessianComp
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.133     [f_
+             new,g_new,H] = funObj(x + t*d,varargin{:});
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.136 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (12.93028pt too wide) in paragraph at lines 132--136
+[]\tenrm if na-rgout == 6  fu-nE-vals > 1  sa-ve-Hes-sian-Comp [f$[]\teni ew; g
+[]ew; H\tenrm ] = \teni funObj\tenrm (\teni x \tenrm + \teni t \tensy ^^C \teni
+ d; varargin[]\tenrm ); \teni funEvals \tenrm =|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm i
+.\tenrm f
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm n
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.137 x_
+        new = x + t*d;
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.138 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+)
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+<*> ...m mcholinc.m mchol.m mex minFunc.m minFunc_
+                                                  processInputOptions.m poly...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Emergency stop.
+<*> ...econdTriu.m taylorModel.m WolfeLineSearch.m
+                                                  
+*** (job aborted, no legal \end found)
+
+No pages of output.
