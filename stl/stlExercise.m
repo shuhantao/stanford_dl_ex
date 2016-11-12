@@ -68,35 +68,38 @@ fprintf('# examples in supervised testing set: %d\n\n', size(testData, 2));
 %  This trains the RICA on the unlabeled training images. 
 
 %  Randomly initialize the parameters
-randTheta = randn(params.numFeatures,params.n)*0.01;  % 1/sqrt(params.n);
-randTheta = randTheta ./ repmat(sqrt(sum(randTheta.^2,2)), 1, size(randTheta,2)); 
-randTheta = randTheta(:);
-
-% subsample random patches from the unlabelled+training data
-patches = samplePatches([unlabeledData,trainData],params.patchWidth,200000);
-
-%configure minFunc
-options.Method = 'lbfgs';
-options.MaxFunEvals = Inf;
-options.MaxIter = 1000;
-% You'll need to replace this line with RICA training code
-opttheta = randTheta;
-
-%  Find opttheta by running the RICA on all the training patches.
-%  You will need to whitened the patches with the zca2 function 
-%  then call minFunc with the softICACost function as seen in the RICA exercise.
-%%% YOUR CODE HERE %%%
-
-% reshape visualize weights
-W = reshape(opttheta, params.numFeatures, params.n);
-display_network(W');
-
-%% ======================================================================
-
+% randTheta = randn(params.numFeatures,params.n)*0.01;  % 1/sqrt(params.n);
+% randTheta = randTheta ./ repmat(sqrt(sum(randTheta.^2,2)), 1, size(randTheta,2)); 
+% randTheta = randTheta(:);
+% 
+% % subsample random patches from the unlabelled+training data
+% patches = samplePatches([unlabeledData,trainData],params.patchWidth,200000);
+% 
+% %configure minFunc
+% options.Method = 'lbfgs';
+% options.MaxFunEvals = Inf;
+% options.MaxIter = 1000;
+% % You'll need to replace this line with RICA training code
+% 
+% %  Find opttheta by running the RICA on all the training patches.
+% %  You will need to whitened the patches with the zca2 function 
+% %  then call minFunc with the softICACost function as seen in the RICA exercise.
+% %%% YOUR CODE HERE %%%
+% opttheta = randTheta;
+% [patches,V] = zca2(patches);
+% [opttheta,cost,exitflag] = minFunc(@(theta)softICACost(theta,patches,params),randTheta,options);
+% 
+% % reshape visualize weights
+% W = reshape(opttheta, params.numFeatures, params.n);
+% display_network(W');
+% save opttheta.mat opttheta W V
+% % ======================================================================
+load opttheta.mat
 %% STEP 3: Extract Features from the Supervised Dataset
 % pre-multiply the weights with whitening matrix, equivalent to whitening
 % each image patch before applying convolution. V should be the same V
 % returned by the zca2 when you whiten the patches.
+W = reshape(opttheta, params.numFeatures, params.n);
 W = W*V;
 %  reshape RICA weights to be convolutional weights.
 W = reshape(W, params.numFeatures, params.patchWidth, params.patchWidth);
@@ -112,6 +115,7 @@ testImages=reshape(testData, imgSize, imgSize, size(testData, 2));
 %  TODO: You will need to complete feedfowardRICA.m 
 trainAct = feedfowardRICA(filterDim, poolDim, numFilters, trainImages, W);
 testAct = feedfowardRICA(filterDim, poolDim, numFilters, testImages, W);
+
 %  reshape the responses into feature vectors
 featureSize = size(trainAct,1)*size(trainAct,2)*size(trainAct,3);
 trainFeatures = reshape(trainAct, featureSize, size(trainData, 2));
@@ -131,20 +135,28 @@ randTheta2 = randTheta2(:);
 options.Method = 'lbfgs';
 options.MaxFunEvals = Inf;
 options.MaxIter = 300;
-
 % optimize
 %%% YOUR CODE HERE %%%
-
+opptTheat2 = randTheta2(:);
+[opptTheat2(:),~,~] = minFunc(@ softmax_regression_vec,randTheta2(:),options,trainFeatures,trainLabels);
 
 %%======================================================================
 %% STEP 5: Testing 
 % Compute Predictions on tran and test sets using softmaxPredict
 % and softmaxModel
 %%% YOUR CODE HERE %%%
+opptTheat2 = reshape(opptTheat2,[],numClasses);
+tx = exp(trainFeatures'*(opptTheat2/1000));
+sm = sum(tx,2);
+tmp = bsxfun(@rdivide,tx,sm);
+[~,train_pred] = max(tmp,[],2);
+tx = exp(testFeatures'*(opptTheat2/1000));
+sm = sum(tx,2);
+tmp = bsxfun(@rdivide,tx,sm);
+[~,pred] = max(tmp,[],2);
 % Classification Score
 fprintf('Train Accuracy: %f%%\n', 100*mean(train_pred(:) == trainLabels(:)));
 fprintf('Test Accuracy: %f%%\n', 100*mean(pred(:) == testLabels(:)));
 % You should get 100% train accuracy and ~99% test accuracy. With random
 % convolutional weights we get 97.5% test accuracy. Actual results may
 % vary as a result of random initializations
-

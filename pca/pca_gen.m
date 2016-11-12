@@ -4,7 +4,8 @@
 %  x will be a 784 * 600000 matrix, where the kth column x(:, k) corresponds to
 %  the raw image data from the kth 12x12 image patch sampled.
 %  You do not need to change the code below.
-
+close all;
+clear;
 addpath(genpath('../common'))
 x = loadMNISTImages('../common/train-images-idx3-ubyte');
 figure('name','Raw images');
@@ -16,13 +17,17 @@ display_network(x(:,randsel));
 %  You can make use of the mean and repmat/bsxfun functions.
 
 %%% YOUR CODE HERE %%%
-
+x = x-repmat(mean(x,2),1,size(x,2));
 %%================================================================
 %% Step 1a: Implement PCA to obtain xRot
 %  Implement PCA to obtain xRot, the matrix in which the data is expressed
 %  with respect to the eigenbasis of sigma, which is the matrix U.
 
 %%% YOUR CODE HERE %%%
+sigma = x*x'/size(x,2);
+[U,S,V] = svd(sigma);
+xRot = U'*x;
+
 
 %%================================================================
 %% Step 1b: Check your implementation of PCA
@@ -32,20 +37,25 @@ display_network(x(:,randsel));
 %  Write code to compute the covariance matrix, covar. 
 %  When visualised as an image, you should see a straight line across the
 %  diagonal (non-zero entries) against a blue background (zero entries).
-
 %%% YOUR CODE HERE %%%
+covar = xRot*xRot'/size(x,2);
 
 % Visualise the covariance matrix. You should see a line across the
 % diagonal against a blue background.
 figure('name','Visualisation of covariance matrix');
 imagesc(covar);
-
 %%================================================================
 %% Step 2: Find k, the number of components to retain
 %  Write code to determine k, the number of components to retain in order
 %  to retain at least 99% of the variance.
 
 %%% YOUR CODE HERE %%%
+for k=1:size(x,1)
+    if(sum(sum(S(1:k,1:k)))/sum(S(:))>0.99) 
+        break;
+    end
+end
+% k = ceil(sqrt(k))^2;
 
 %%================================================================
 %% Step 3: Implement PCA with dimension reduction
@@ -62,6 +72,7 @@ imagesc(covar);
 %  correspond to dimensions with low variation.
 
 %%% YOUR CODE HERE %%%
+xHat= U(:,1:k)*xRot(1:k,:); 
 
 % Visualise the data, and compare it to the raw data
 % You should observe that the raw and processed data are of comparable quality.
@@ -80,7 +91,7 @@ display_network(x(:,randsel));
 
 epsilon = 1e-1; 
 %%% YOUR CODE HERE %%%
-
+xPCAwhite = diag(1./sqrt(diag(S) + epsilon)) * U' * x;
 %% Step 4b: Check your implementation of PCA whitening 
 %  Check your implementation of PCA whitening with and without regularisation. 
 %  PCA whitening without regularisation results a covariance matrix 
@@ -110,7 +121,7 @@ imagesc(covar);
 %  that whitening results in, among other things, enhanced edges.
 
 %%% YOUR CODE HERE %%%
-
+xZCAWhite = U(:,1:k)*xPCAwhite(1:k,:);
 % Visualise the data, and compare it to the raw data.
 % You should observe that the whitened images have enhanced edges.
 figure('name','ZCA whitened images');

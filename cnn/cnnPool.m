@@ -30,6 +30,10 @@ pooledFeatures = zeros(convolvedDim / poolDim, ...
 %   Use mean pooling here.
 
 %%% YOUR CODE HERE %%%
-
+for i=1:convolvedDim/poolDim
+  for j=1:convolvedDim/poolDim
+    pooledFeatures(i,j,:,:)=  mean(mean(convolvedFeatures((i-1)*poolDim+1:min(i*poolDim,size(convolvedFeatures,1)),(j-1)*poolDim+1:min(j*poolDim,size(convolvedFeatures,2)),:,:),1),2);
+    %size(tmp)
+  end
 end
 

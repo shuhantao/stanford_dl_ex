@@ -39,7 +39,7 @@ theta = cnnInitParams(imageDim,filterDim,numFilters,poolDim,numClasses);
 %  calculation for your cnnCost.m function.  You may need to add the
 %  appropriate path or copy the file to this directory.
 
-DEBUG=false;  % set this to true to check gradient
+DEBUG=true;  % set this to true to check gradient
 if DEBUG
     % To speed up gradient checking, we will use a reduced network and
     % a debugging data set
@@ -62,12 +62,11 @@ if DEBUG
  
     % Use this to visually compare the gradients side by side
     disp([numGrad grad]);
-    
     diff = norm(numGrad-grad)/norm(numGrad+grad);
     % Should be small. In our implementation, these values are usually 
     % less than 1e-9.
     disp(diff); 
- 
+    
     assert(diff < 1e-9,...
         'Difference too large. Check your gradient computation again');
     

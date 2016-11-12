@@ -29,7 +29,6 @@ end
 A = A - mean(A(:));
 
 if opt_graycolor, colormap(gray); end
-
 % compute rows, cols
 [L M]=size(A);
 sz=sqrt(L);

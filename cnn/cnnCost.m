@@ -26,7 +26,6 @@ if ~exist('pred','var')
     pred = false;
 end;
 
-
 imageDim = size(images,1); % height/width of image
 numImages = size(images,3); % number of images
 
@@ -65,18 +64,18 @@ convDim = imageDim-filterDim+1; % dimension of convolved output
 outputDim = (convDim)/poolDim; % dimension of subsampled output
 
 % convDim x convDim x numFilters x numImages tensor for storing activations
-activations = zeros(convDim,convDim,numFilters,numImages);
+% activations = zeros(convDim,convDim,numFilters,numImages);
 
 % outputDim x outputDim x numFilters x numImages tensor for storing
 % subsampled activations
-activationsPooled = zeros(outputDim,outputDim,numFilters,numImages);
+% activationsPooled = zeros(outputDim,outputDim,numFilters,numImages);
 
 %%% YOUR CODE HERE %%%
-
+activations = cnnConvolve(filterDim,numFilters,images,Wc,bc);
+activationsPooled = cnnPool(poolDim,activations);
 % Reshape activations into 2-d matrix, hiddenSize x numImages,
 % for Softmax layer
 activationsPooled = reshape(activationsPooled,[],numImages);
-
 %% Softmax Layer
 %  Forward propagate the pooled activations calculated above into a
 %  standard softmax layer. For your convenience we have reshaped
@@ -88,7 +87,7 @@ activationsPooled = reshape(activationsPooled,[],numImages);
 probs = zeros(numClasses,numImages);
 
 %%% YOUR CODE HERE %%%
-
+probs = Wd*activationsPooled+repmat(bd,1,numImages);
 %%======================================================================
 %% STEP 1b: Calculate Cost
 %  In this step you will use the labels given as input and the probs
@@ -96,7 +95,11 @@ probs = zeros(numClasses,numImages);
 %  results in cost.
 
 cost = 0; % save objective into cost
-
+probs=exp(probs);
+I=sub2ind(size(probs),labels',1:numImages);
+sm = sum(probs);
+p = bsxfun(@rdivide,probs,sm);
+cost =- sum(log(p(I)))/numImages;
 %%% YOUR CODE HERE %%%
 
 % Makes predictions given probs and returns without backproagating errors.
@@ -107,7 +110,7 @@ if pred
     return;
 end;
 
-%%======================================================================
+%======================================================================
 %% STEP 1c: Backpropagation
 %  Backpropagate errors through the softmax and convolutional/subsampling
 %  layers.  Store the errors for the next step to calculate the gradient.
@@ -118,7 +121,19 @@ end;
 %  quickly.
 
 %%% YOUR CODE HERE %%%
+A = zeros(size(probs));
+A(I) =1;
+diffs = -(A-p);
+delta = (Wd'*diffs) ;
+m_delta = reshape(delta,outputDim,outputDim,numFilters,numImages);
+delta_conv= zeros(convDim,convDim,numFilters,numImages);
+for i=1:numImages
+  for j=1:numFilters
+    delta_conv(:,:,j,i) = (1/poolDim^2) * kron(m_delta(:,:,j,i),ones(poolDim));
+  end
+end
 
+delta_conv = delta_conv.*activations.*(1-activations);
 %%======================================================================
 %% STEP 1d: Gradient Calculation
 %  After backpropagating the errors above, we can use them to calculate the
@@ -128,6 +143,18 @@ end;
 %  for that filter with each image and aggregate over images.
 
 %%% YOUR CODE HERE %%%
+for i=1:numFilters
+    Wc_i = zeros(filterDim,filterDim);
+    for j=1:numImages  
+        Wc_i = Wc_i+conv2(squeeze(images(:,:,j)),rot90(squeeze(delta_conv(:,:,i,j)),2),'valid');
+    end
+    Wc_grad(:,:,i) = (1./numImages)*Wc_i;
+    tmp = delta_conv(:,:,i,:);
+    tmp = tmp(:);
+    bc_grad(i) = sum(tmp)/numImages;
+end
+Wd_grad = diffs*activationsPooled'/numImages;
+bd_grad = sum(diffs,2)/numImages;
 
 %% Unroll gradient into grad vector for minFunc
 grad = [Wc_grad(:) ; Wd_grad(:) ; bc_grad(:) ; bd_grad(:)];
